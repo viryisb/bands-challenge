@@ -7,50 +7,72 @@ import { sortBands } from "../../utils/data-treatment";
 import Albums from "../albums/Albums";
 import Band from "./Band";
 
-const Bands = ({ selectedGenre, sortDirection }) => {
-  const [bands, setBands] = React.useState([]);
-  const [filteredBands, setBandFiltered] = React.useState([]);
-  const [albums, setAlbums] = React.useState([]);
+const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
+  const [filteredOrderedBands, setFilteredOrderedBands] = React.useState(bands);
 
+  React.useEffect(() => {
+    const newFilteredBands = !selectedGenre
+      ? bands
+      : bands.filter((band) => band.genreCode === selectedGenre);
+    const newFilteredOrderedBands = sortBands(newFilteredBands, {
+      sortDirection
+    });
+
+    setFilteredOrderedBands(newFilteredOrderedBands);
+  }, [bands, selectedGenre, sortDirection]);
+
+  return [filteredOrderedBands, setFilteredOrderedBands];
+};
+
+const DEFAULT_USE_BANDS_OPTIONS = { selectedGenre: "", sortDirection: "asc" };
+const useBands = (
+  initialBands = [],
+  { selectedGenre, sortDirection } = DEFAULT_USE_BANDS_OPTIONS
+) => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [bands, setBands] = React.useState(initialBands);
+  const [filteredOrderedBands] = useFilteredOrderedBands(bands, {
+    selectedGenre,
+    sortDirection
+  });
 
   React.useEffect(() => {
     setIsLoading(true);
     const settingBands = async () => {
-      const dataBands = await fetchBands(selectedGenre);
+      const dataBands = await fetchBands();
 
       setBands(dataBands);
       setIsLoading(false);
     };
 
     settingBands();
-  }, [setBands]);
+  }, [setBands, setIsLoading]);
+
+  return {
+    bands: filteredOrderedBands,
+    setBands,
+    isLoading
+  };
+};
+
+const useAlbums = (initialAlbums = []) => {
+  const [albums, setAlbums] = React.useState(initialAlbums);
 
   React.useEffect(() => {
     const settingAlbums = async () => {
-      const dataAlbums = await fetchAlbums(selectedGenre);
+      const dataAlbums = await fetchAlbums();
       setAlbums(dataAlbums);
     };
 
     settingAlbums();
   }, [setAlbums]);
 
-  React.useEffect(() => {
-    const filteredBands = bands.filter(
-      (band) => band.genreCode === selectedGenre
-    );
-    setBandFiltered(filteredBands);
-  }, [selectedGenre]);
+  return [albums, setAlbums];
+};
 
-  React.useEffect(() => {
-    const { sortedBands, sortedFilteredBands } = sortBands(
-      { bands, filteredBands },
-      { direction: sortDirection }
-    );
-
-    setBands(sortedBands);
-    setBandFiltered(sortedFilteredBands);
-  }, [sortDirection]);
+const Bands = ({ selectedGenre, sortDirection }) => {
+  const [albums, setAlbums] = useAlbums([]);
+  const { bands, isLoading } = useBands([], { selectedGenre, sortDirection });
 
   if (isLoading)
     return (
@@ -62,34 +84,19 @@ const Bands = ({ selectedGenre, sortDirection }) => {
   return (
     <>
       <div className="container mt-4 band-style">
-        {!selectedGenre
-          ? bands.map((b) => (
-              <div key={b.id} className="col-3">
-                <Band
-                  key={b.id}
-                  idBand={b.id}
-                  bandName={b.name}
-                  genre={b.genreCode}
-                  year={b.year}
-                  country={b.country}
-                  members={b.members}
-                />
-              </div>
-            ))
-          : filteredBands.map((f) => (
-              <div key={f.id} className="band-style col-4">
-                <Band
-                  key={f.id}
-                  idBand={f.id}
-                  bandName={f.name}
-                  genre={f.genreCode}
-                  year={f.year}
-                  country={f.country}
-                  members={f.members}
-                  albums={albums}
-                />
-              </div>
-            ))}
+        {bands.map((b) => (
+          <div key={b.id} className="col-3">
+            <Band
+              key={b.id}
+              idBand={b.id}
+              bandName={b.name}
+              genre={b.genreCode}
+              year={b.year}
+              country={b.country}
+              members={b.members}
+            />
+          </div>
+        ))}
       </div>
       <Router>
         <Switch>
@@ -101,4 +108,4 @@ const Bands = ({ selectedGenre, sortDirection }) => {
     </>
   );
 };
-export default Bands;
+export default Bands

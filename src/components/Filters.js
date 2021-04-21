@@ -1,27 +1,29 @@
 import * as React from "react";
+
 import { fetchGenres } from "../utils/data-fetching";
 
 const Filters = ({
-  genres,
+  sortDirection,
+  setSortDirection,
   selectedGenre,
   setSelectedGenre,
-  setGenres,
-  setSortDirection,
 }) => {
+  const [genres, setGenres] = React.useState([]);
+
   React.useEffect(() => {
     const settingGenres = async () => {
-      const dataGenres = await fetchGenres(selectedGenre);
+      const dataGenres = await fetchGenres();
       setGenres(dataGenres);
     };
 
     settingGenres();
   }, [setGenres]);
 
-  const handleChange = (e) => {
+  const handleGenreChange = (e) => {
     setSelectedGenre(e.target.value);
   };
 
-  const sortGroup = (e) => {
+  const handleSortChange = (e) => {
     setSortDirection(e.target.value);
   };
 
@@ -30,7 +32,7 @@ const Filters = ({
       <select
         className="form-select"
         value={selectedGenre}
-        onChange={handleChange}
+        onChange={handleGenreChange}
       >
         <option value="" defaultChecked>
           Genres
@@ -42,7 +44,7 @@ const Filters = ({
         ))}
       </select>
 
-      <div className="col-8 text-white mt-3" onChange={sortGroup}>
+      <div className="col-8 text-white mt-3">
         <div className="form-check form-check-inline">
           <label className="form-check-label">Sort</label>
         </div>
@@ -53,7 +55,8 @@ const Filters = ({
             name="inlineRadioOptions"
             id="inlineRadio1"
             value="asc"
-            defaultChecked
+            checked={sortDirection === "asc"}
+            onChange={handleSortChange}
           />
           <label className="form-check-label" htmlFor="inlineRadio1">
             A-Z
@@ -66,6 +69,8 @@ const Filters = ({
             name="inlineRadioOptions"
             id="inlineRadio2"
             value="desc"
+            checked={sortDirection === "desc"}
+            onChange={handleSortChange}
           />
           <label className="form-check-label" htmlFor="inlineRadio2">
             Z-A
@@ -75,5 +80,4 @@ const Filters = ({
     </div>
   );
 };
-export default Filters
-
+export default Filters 

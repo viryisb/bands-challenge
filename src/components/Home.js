@@ -1,6 +1,4 @@
 import * as React from "react";
-// import "./home.css";
-
 import Filters from "./Filters";
 import Bands from "./bands/Bands";
 
@@ -23,13 +21,13 @@ const Home = ({ logout, isAuth }) => {
   return (
     <>
       <Filters
-        genres={genres}
-        setGenres={setGenres}
-        setSortDirection={setSortDirection}
-        selectedGenre={selectedGenre}
-        setSelectedGenre={setSelectedGenre}
+        genres={useFilters.genres}
+        setGenres={useFilters.setGenres}
+        setSortDirection={useFilters.setSortDirection}
+        selectedGenre={useFilters.selectedGenre}
+        setSelectedGenre={useFilters.setSelectedGenre}
       />
-      <Bands selectedGenre={selectedGenre} sortDirection={sortDirection} />
+      <Bands selectedGenre={useFilters.selectedGenre} sortDirection={useFilters.sortDirection} />
     </>
   );
 };

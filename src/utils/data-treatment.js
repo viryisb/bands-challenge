@@ -1,5 +1,5 @@
 export function sortBands({ bands, filteredBands }, { direction }) {
-    const isAscending = direction === "asc";
+    const isAscending = direction == "asc";
   
     const sortedBands = [...bands].sort((a, b) => {
       if (a.name > b.name) {
