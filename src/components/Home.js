@@ -3,13 +3,10 @@ import Filters from "./Filters";
 import Bands from "./bands/Bands";
 
 const useFilters = () => {
-  const [genres, setGenres] = React.useState([]);
   const [sortDirection, setSortDirection] = React.useState("asc");
   const [selectedGenre, setSelectedGenre] = React.useState("");
 
   return {
-    genres,
-    setGenres,
     sortDirection,
     setSortDirection,
     selectedGenre,
@@ -17,17 +14,14 @@ const useFilters = () => {
   };
 };
 
-const Home = ({ logout, isAuth }) => {
+const Home = () => {
+  const filters = useFilters();
+  const { selectedGenre, sortDirection } = filters;
+
   return (
     <>
-      <Filters
-        genres={useFilters.genres}
-        setGenres={useFilters.setGenres}
-        setSortDirection={useFilters.setSortDirection}
-        selectedGenre={useFilters.selectedGenre}
-        setSelectedGenre={useFilters.setSelectedGenre}
-      />
-      <Bands selectedGenre={useFilters.selectedGenre} sortDirection={useFilters.sortDirection} />
+      <Filters {...filters} />
+      <Bands selectedGenre={selectedGenre} sortDirection={sortDirection} />
     </>
   );
 };

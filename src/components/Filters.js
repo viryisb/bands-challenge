@@ -37,11 +37,15 @@ const Filters = ({
         <option value="" defaultChecked>
           Genres
         </option>
-        {genres.map((genre) => (
-          <option key={genre.code} value={genre.code}>
-            {genre.name}
-          </option>
-        ))}
+        {genres &&
+          genres.map((genre) => {
+            return (
+              <option key={genre.code} value={genre.code}>
+                {genre.name}
+              </option>
+            );
+          })}
+        ))
       </select>
 
       <div className="col-8 text-white mt-3">
@@ -80,4 +84,4 @@ const Filters = ({
     </div>
   );
 };
-export default Filters 
+export default Filters;
