@@ -1,7 +1,7 @@
 import * as React from "react";
 import { fetchGenres } from "../utils/data-fetching";
 
-export default Filters = ({
+const Filters = ({
   genres,
   selectedGenre,
   setSelectedGenre,
@@ -75,3 +75,5 @@ export default Filters = ({
     </div>
   );
 };
+export default Filters
+

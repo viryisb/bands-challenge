@@ -15,11 +15,11 @@ const useFilters = () => {
     sortDirection,
     setSortDirection,
     selectedGenre,
-    setSelectedGenre
+    setSelectedGenre,
   };
 };
 
-export default Home = ({ logout, isAuth }) => {
+const Home = ({ logout, isAuth }) => {
   return (
     <>
       <Filters
@@ -33,3 +33,4 @@ export default Home = ({ logout, isAuth }) => {
     </>
   );
 };
+export default Home;
