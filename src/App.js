@@ -4,34 +4,33 @@ import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-
+import Band from "./components/bands/Band";
 
 function App() {
-  const [isAuth, setIsAuth] = React.useState(false);
+  const [isAuthenticated, setisAuthenticated] = React.useState(false);
 
   const login = (e) => {
     e.preventDefault();
-    setIsAuth(true);
+    setisAuthenticated(true);
   };
   const logout = (e) => {
     e.preventDefault();
-    setIsAuth(false);
+    setisAuthenticated(false);
   };
 
   return (
     <main className="main">
       <Router>
         <Switch>
-        <Route exact path="/">
-          <Login login={login} isAuth={isAuth} />
-        </Route>
-        <ProtectedRoute path="/home" isAuth={isAuth}>
-          <Home logout={logout} isAuth={isAuth} />
-        </ProtectedRoute>
+          <Route exact path="/">
+            <Login login={login} isAuthenticated={isAuthenticated} />
+          </Route>
+          <ProtectedRoute path="/home" isAuthenticated={isAuthenticated}>
+            <Home logout={logout} isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
         </Switch>
       </Router>
-      </main>
+    </main>
   );
 }
 

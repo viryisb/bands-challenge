@@ -3,8 +3,8 @@ import {Redirect} from 'react-router-dom'
 
 
 
-const Login = ({login,isAuth}) => {
-  if (isAuth){return <Redirect to ={{pathname:'/home'}}/>}
+const Login = ({login,isAuthenticated}) => {
+  if (isAuthenticated){return <Redirect to ={{pathname:'/home'}}/>}
   return (
     <div className="container">
       <div className="row">
