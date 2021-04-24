@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Band from "./components/bands/Band";
+import Bands from "./components/bands/Bands";
 
 function App() {
   const [isAuthenticated, setisAuthenticated] = React.useState(false);
@@ -28,6 +29,11 @@ function App() {
           <ProtectedRoute path="/home" isAuthenticated={isAuthenticated}>
             <Home logout={logout} isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
+          <ProtectedRoute
+            path="/band"
+            component={Band}
+            isAuthenticated={isAuthenticated}
+          />
         </Switch>
       </Router>
     </main>
