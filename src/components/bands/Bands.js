@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 
 import { fetchBands, fetchAlbums } from "../../utils/data-fetching";
 import { sortBands } from "../../utils/data-treatment";
@@ -15,7 +15,7 @@ const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
       ? bands
       : bands.filter((band) => band.genreCode === selectedGenre);
     const newFilteredOrderedBands = sortBands(newFilteredBands, {
-      sortDirection
+      sortDirection,
     });
 
     setFilteredOrderedBands(newFilteredOrderedBands);
@@ -33,7 +33,7 @@ const useBands = (
   const [bands, setBands] = React.useState(initialBands);
   const [filteredOrderedBands] = useFilteredOrderedBands(bands, {
     selectedGenre,
-    sortDirection
+    sortDirection,
   });
 
   React.useEffect(() => {
@@ -51,7 +51,7 @@ const useBands = (
   return {
     bands: filteredOrderedBands,
     setBands,
-    isLoading
+    isLoading,
   };
 };
 
@@ -86,7 +86,7 @@ const Bands = ({ selectedGenre, sortDirection }) => {
       <div className="container mt-4 band-style">
         {bands.map((b) => (
           <div key={b.id} className="col-3">
-            <Band
+           {/*  <Band
               key={b.id}
               idBand={b.id}
               bandName={b.name}
@@ -94,18 +94,36 @@ const Bands = ({ selectedGenre, sortDirection }) => {
               year={b.year}
               country={b.country}
               members={b.members}
-            />
+            /> */}
+
+            <Link
+              to={{
+                pathname: "/band",
+                band: b,
+              }}
+            >
+              {b.name}
+            </Link>
           </div>
         ))}
       </div>
       <Router>
         <Switch>
           <Route exact path="/home/:idBand">
-            <Albums albums={albums} />
+           {/*  <Band band={Band} /> este después descomentar */ }
+            {/*  <Band
+              key={b.id}
+              idBand={b.id}
+              bandName={b.name}
+              genre={b.genreCode}
+              year={b.year}
+              country={b.country}
+              members={b.members}
+            /> */}
           </Route>
         </Switch>
       </Router>
     </>
   );
 };
-export default Bands
+export default Bands;
