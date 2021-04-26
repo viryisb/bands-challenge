@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import  React, { useEffect, useState } from "react";
 import { fetchGenres } from "../utils/data-fetching";
 
 const Filters = ({
@@ -8,9 +7,9 @@ const Filters = ({
   selectedGenre,
   setSelectedGenre,
 }) => {
-  const [genres, setGenres] = React.useState([]);
+  const [genres, setGenres] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const settingGenres = async () => {
       const dataGenres = await fetchGenres();
       setGenres(dataGenres);

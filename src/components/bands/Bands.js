@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 
 import { fetchBands, fetchAlbums } from "../../utils/data-fetching";
@@ -8,9 +8,9 @@ import Albums from "../albums/Albums";
 import Band from "./Band";
 
 const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
-  const [filteredOrderedBands, setFilteredOrderedBands] = React.useState(bands);
+  const [filteredOrderedBands, setFilteredOrderedBands] = useState(bands);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newFilteredBands = !selectedGenre
       ? bands
       : bands.filter((band) => band.genreCode === selectedGenre);
@@ -29,14 +29,14 @@ const useBands = (
   initialBands = [],
   { selectedGenre, sortDirection } = DEFAULT_USE_BANDS_OPTIONS
 ) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [bands, setBands] = React.useState(initialBands);
+  const [isLoading, setIsLoading] = useState(false);
+  const [bands, setBands] = useState(initialBands);
   const [filteredOrderedBands] = useFilteredOrderedBands(bands, {
     selectedGenre,
     sortDirection,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
     const settingBands = async () => {
       const dataBands = await fetchBands();
@@ -56,9 +56,9 @@ const useBands = (
 };
 
 const useAlbums = (initialAlbums = []) => {
-  const [albums, setAlbums] = React.useState(initialAlbums);
+  const [albums, setAlbums] = useState(initialAlbums);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const settingAlbums = async () => {
       const dataAlbums = await fetchAlbums();
       setAlbums(dataAlbums);
@@ -110,7 +110,7 @@ const Bands = ({ selectedGenre, sortDirection }) => {
       <Router>
         <Switch>
           <Route exact path="/home/:idBand">
-           {/*  <Band band={Band} /> este después descomentar */ }
+            <Band band={Band} /> 
             {/*  <Band
               key={b.id}
               idBand={b.id}

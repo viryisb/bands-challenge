@@ -1,10 +1,10 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Filters from "./Filters";
 import Bands from "./bands/Bands";
 
 const useFilters = () => {
-  const [sortDirection, setSortDirection] = React.useState("asc");
-  const [selectedGenre, setSelectedGenre] = React.useState("");
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   return {
     sortDirection,

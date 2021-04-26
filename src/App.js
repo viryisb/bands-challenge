@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -8,7 +8,7 @@ import Band from "./components/bands/Band";
 import Bands from "./components/bands/Bands";
 
 function App() {
-  const [isAuthenticated, setisAuthenticated] = React.useState(false);
+  const [isAuthenticated, setisAuthenticated] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
@@ -26,6 +26,7 @@ function App() {
           <Route exact path="/">
             <Login login={login} isAuthenticated={isAuthenticated} />
           </Route>
+
           <ProtectedRoute path="/home" isAuthenticated={isAuthenticated}>
             <Home logout={logout} isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
