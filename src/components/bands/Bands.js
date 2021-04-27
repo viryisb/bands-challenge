@@ -15,7 +15,7 @@ const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
       ? bands
       : bands.filter((band) => band.genreCode === selectedGenre);
     const newFilteredOrderedBands = sortBands(newFilteredBands, {
-      sortDirection,
+      sortDirection
     });
 
     setFilteredOrderedBands(newFilteredOrderedBands);
@@ -33,7 +33,7 @@ const useBands = (
   const [bands, setBands] = useState(initialBands);
   const [filteredOrderedBands] = useFilteredOrderedBands(bands, {
     selectedGenre,
-    sortDirection,
+    sortDirection
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const useBands = (
   return {
     bands: filteredOrderedBands,
     setBands,
-    isLoading,
+    isLoading
   };
 };
 
@@ -71,8 +71,11 @@ const useAlbums = (initialAlbums = []) => {
 };
 
 const Bands = ({ selectedGenre, sortDirection }) => {
-  /* const [albums, setAlbums] = useAlbums([]); */
+  const [albums] = useAlbums([]);
   const { bands, isLoading } = useBands([], { selectedGenre, sortDirection });
+
+  console.log(albums);
+  console.log(bands);
 
   if (isLoading)
     return (
@@ -83,30 +86,31 @@ const Bands = ({ selectedGenre, sortDirection }) => {
 
   return (
     <>
-      <div className="container mt-4 band-style">
-        {bands.map((b) => (
-          <div key={b.id} className="col-3">
-            <Link to={`/home/band/${b.id}`}>{b.name}</Link>
-          </div>
-        ))}
-      </div>
-      <Router>
-        <Switch>
-          <Route
-            exact
-            path="/home/band/:idBand"
-            render={({ match }) => {
-              const { idBand } = match.params;
-              const band = bands.find((band) => band.id === +idBand);
-              console.log({ bands, band, idBand });
+      <Switch>
+        <Route
+          exact
+          path="/home/band/:idBand"
+          render={({ match }) => {
+            const { idBand } = match.params;
+            const band = bands.find((band) => band.id === +idBand);
+            const bandAlbums = albums.filter(
+              (album) => album.bandId === +idBand
+            );
 
-              if (!band) return null;
+            if (!band) return null;
 
-              return <Band band={band} />;
-            }}
-          />
-        </Switch>
-      </Router>
+            return <Band band={band} bandAlbums={bandAlbums} />;
+          }}
+        />
+
+        <div className="container mt-4 band-style">
+          {bands.map((b) => (
+            <div key={b.id} className="col-3">
+              <Link to={`/home/band/${b.id}`}>{b.name}</Link>
+            </div>
+          ))}
+        </div>
+      </Switch>
     </>
   );
 };
