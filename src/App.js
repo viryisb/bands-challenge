@@ -30,11 +30,13 @@ function App() {
           <ProtectedRoute path="/home" isAuthenticated={isAuthenticated}>
             <Home logout={logout} isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
-          <ProtectedRoute
+          {/* <ProtectedRoute
             path="/band"
             component={Band}
             isAuthenticated={isAuthenticated}
-          />
+           
+          /> */}
+         
         </Switch>
       </Router>
     </main>

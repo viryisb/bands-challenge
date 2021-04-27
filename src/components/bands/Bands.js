@@ -1,10 +1,10 @@
-import  React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 
 import { fetchBands, fetchAlbums } from "../../utils/data-fetching";
 import { sortBands } from "../../utils/data-treatment";
 
-import Albums from "../albums/Albums";
+/* import Albums from "../albums/Albums"; */
 import Band from "./Band";
 
 const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
@@ -71,7 +71,7 @@ const useAlbums = (initialAlbums = []) => {
 };
 
 const Bands = ({ selectedGenre, sortDirection }) => {
-  const [albums, setAlbums] = useAlbums([]);
+  /* const [albums, setAlbums] = useAlbums([]); */
   const { bands, isLoading } = useBands([], { selectedGenre, sortDirection });
 
   if (isLoading)
@@ -86,41 +86,25 @@ const Bands = ({ selectedGenre, sortDirection }) => {
       <div className="container mt-4 band-style">
         {bands.map((b) => (
           <div key={b.id} className="col-3">
-           {/*  <Band
-              key={b.id}
-              idBand={b.id}
-              bandName={b.name}
-              genre={b.genreCode}
-              year={b.year}
-              country={b.country}
-              members={b.members}
-            /> */}
-
-            <Link
-              to={{
-                pathname: "/band",
-                band: b,
-              }}
-            >
-              {b.name}
-            </Link>
+            <Link to={`/home/band/${b.id}`}>{b.name}</Link>
           </div>
         ))}
       </div>
       <Router>
         <Switch>
-          <Route exact path="/home/:idBand">
-            <Band band={Band} /> 
-            {/*  <Band
-              key={b.id}
-              idBand={b.id}
-              bandName={b.name}
-              genre={b.genreCode}
-              year={b.year}
-              country={b.country}
-              members={b.members}
-            /> */}
-          </Route>
+          <Route
+            exact
+            path="/home/band/:idBand"
+            render={({ match }) => {
+              const { idBand } = match.params;
+              const band = bands.find((band) => band.id === +idBand);
+              console.log({ bands, band, idBand });
+
+              if (!band) return null;
+
+              return <Band band={band} />;
+            }}
+          />
         </Switch>
       </Router>
     </>
