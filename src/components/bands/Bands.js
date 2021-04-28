@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
-
 import { fetchBands, fetchAlbums } from "../../utils/data-fetching";
 import { sortBands } from "../../utils/data-treatment";
-
-/* import Albums from "../albums/Albums"; */
 import Band from "./Band";
 
 const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
@@ -15,7 +12,7 @@ const useFilteredOrderedBands = (bands, { selectedGenre, sortDirection }) => {
       ? bands
       : bands.filter((band) => band.genreCode === selectedGenre);
     const newFilteredOrderedBands = sortBands(newFilteredBands, {
-      sortDirection
+      sortDirection,
     });
 
     setFilteredOrderedBands(newFilteredOrderedBands);
@@ -33,7 +30,7 @@ const useBands = (
   const [bands, setBands] = useState(initialBands);
   const [filteredOrderedBands] = useFilteredOrderedBands(bands, {
     selectedGenre,
-    sortDirection
+    sortDirection,
   });
 
   useEffect(() => {
@@ -51,7 +48,7 @@ const useBands = (
   return {
     bands: filteredOrderedBands,
     setBands,
-    isLoading
+    isLoading,
   };
 };
 
@@ -106,7 +103,9 @@ const Bands = ({ selectedGenre, sortDirection }) => {
         <div className="container mt-4 band-style">
           {bands.map((b) => (
             <div key={b.id} className="col-3">
-              <Link to={`/home/band/${b.id}`}>{b.name}</Link>
+              <Link className="link" to={`/home/band/${b.id}`}>
+                {b.name}
+              </Link>
             </div>
           ))}
         </div>

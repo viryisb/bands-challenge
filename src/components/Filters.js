@@ -34,7 +34,7 @@ const Filters = ({
         onChange={handleGenreChange}
       >
         <option value="" defaultChecked>
-          Genres
+          Filter by genres
         </option>
         {genres &&
           genres.map((genre) => {

@@ -1,47 +1,42 @@
-import React from 'react'
-import {Redirect} from 'react-router-dom'
+import React from "react";
+import { Redirect } from "react-router-dom";
 
-
-
-const Login = ({login,isAuthenticated}) => {
-  if (isAuthenticated){return <Redirect to ={{pathname:'/home'}}/>}
+const Login = ({ login, isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to={{ pathname: "/home" }} />;
+  }
   return (
     <div className="container">
       <div className="row">
-      <div className="col-md-6">
-      <div className="card">
-      </div>
-      </div>
-      </div>
-      <p className="">Please Login</p>
-      <form onSubmit={(e)=>login(e)} className="">
-        <div className="">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            required
-          />
+        <div className="col-md-6">
+          <div className="card">
+            <form onSubmit={(e) => login(e)} className="box">
+              <h1>Login</h1>
+              <p class="text-muted"> Please enter your mail and password</p>
+              
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                required
+                placeholder="Email"
+              />
+
+             
+              <input
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+                required
+              />
+
+              <button type="submit">Login</button>
+            </form>
+          </div>
         </div>
-        <div className="">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            required
-          />
-        </div>
-        <button type="submit" className="">
-          Login
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
