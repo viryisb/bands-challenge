@@ -15,19 +15,15 @@ const useFilters = () => {
   };
 };
 
-const Home = () => {
+const Home = ({ logout }) => {
   const filters = useFilters();
   const { selectedGenre, sortDirection } = filters;
 
   return (
     <>
-     
       <Filters {...filters} />
       <Bands selectedGenre={selectedGenre} sortDirection={sortDirection} />
-      <Navbar  />
-      
-       
-      
+      <Navbar logout={logout} />
     </>
   );
 };

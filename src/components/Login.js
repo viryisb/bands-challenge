@@ -1,19 +1,24 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const Login = ({ login, isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Redirect to={{ pathname: "/home" }} />;
-  }
+const Login = ({ login }) => {
+  const history = useHistory();
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6">
           <div className="card">
-            <form onSubmit={(e) => login(e)} className="box">
+            <form
+              onSubmit={(e) => {
+                login(e);
+                history.push("/home");
+              }}
+              className="box"
+            >
               <h1>Login</h1>
-              <p class="text-muted"> Please enter your mail and password</p>
-              
+              <p className="text-muted"> Please enter your mail and password</p>
+
               <input
                 type="email"
                 className="form-control"
@@ -23,7 +28,6 @@ const Login = ({ login, isAuthenticated }) => {
                 placeholder="Email"
               />
 
-             
               <input
                 type="password"
                 className="form-control"

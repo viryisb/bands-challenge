@@ -1,18 +1,14 @@
 import React from "react";
-import {Redirect} from 'react-router-dom'
 
-
-const Navbar = ({isAuth,logout}) => {
-    if (isAuth===false) return <Redirect to={{pathname:'/'}}/>
+const Navbar = ({ logout }) => {
   return (
-    <div className='navbar-component'>
+    <div className="navbar-component">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-            <button className="logout" onClick={(e)=>logout(e)}>
-                Log Out
-            </button>
-          </div>
-       
+          <button className="logout" onClick={(e) => logout(e)}>
+            Log Out
+          </button>
+        </div>
       </nav>
     </div>
   );
