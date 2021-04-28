@@ -27,7 +27,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-More info about this project:
+### More info about this project:
 
 This is a Development Challenge for React. This challenge aims to evaluate basic skills in React development. The idea is to build an simple data query website for music bands.
 
