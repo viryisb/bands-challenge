@@ -29,8 +29,7 @@ Your app is ready to be deployed!
 
 More info about this project:
 
-This is a Development Challenge for React
-This challenge aims to evaluate basic skills in React development. The idea is to build an simple data query website for music bands.
+This is a Development Challenge for React. This challenge aims to evaluate basic skills in React development. The idea is to build an simple data query website for music bands.
 
 Functionality
 The website has to contain the following pages/features:
