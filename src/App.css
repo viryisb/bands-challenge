@@ -103,8 +103,8 @@ body {
 .list-no-style {
   list-style: none;
 }
-.band-style{
-  padding:100px;
+.band-style {
+  padding: 100px;
 }
 
 .band-info {
@@ -113,18 +113,20 @@ body {
   margin: -25px 0 0 -25px;
   position: absolute;
   background: #3a3a3a;
-  text-align:justify;
+  text-align: justify;
   transition: 0.25s;
   margin-left: 250px;
   margin-top: 100px;
 }
 
-.form-select{
+.form-select {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   border: 0;
   background: #3a3a3a;
   display: block;
   margin: 20px auto;
-  text-align:start;
+  text-align: start;
   border: 2px solid #2ecc71;
   padding: 14px 40px 14px 14px;
   outline: none;
@@ -132,4 +134,27 @@ body {
   border-radius: 24px;
   transition: 0.25s;
   cursor: pointer;
+}
+.sort {
+  align-items: center;
+}
+.form-check-inline {
+  color: darkgrey;
+  margin-left: 50px;
+}
+.logout {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }

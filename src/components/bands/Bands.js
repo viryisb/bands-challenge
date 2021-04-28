@@ -71,13 +71,10 @@ const Bands = ({ selectedGenre, sortDirection }) => {
   const [albums] = useAlbums([]);
   const { bands, isLoading } = useBands([], { selectedGenre, sortDirection });
 
-  console.log(albums);
-  console.log(bands);
-
   if (isLoading)
     return (
-      <div className="mt-5">
-        <p>Loading...</p>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     );
 

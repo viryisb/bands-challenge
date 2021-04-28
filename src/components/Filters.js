@@ -47,7 +47,7 @@ const Filters = ({
         ))
       </select>
 
-      <div className="col-8 text-white mt-3">
+      <div className="col-8 text-white mt-3 sort">
         <div className="form-check form-check-inline">
           <label className="form-check-label">Sort</label>
         </div>

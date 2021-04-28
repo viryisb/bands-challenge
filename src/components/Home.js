@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Filters from "./Filters";
 import Bands from "./bands/Bands";
+import Navbar from "./Navbar";
 
 const useFilters = () => {
   const [sortDirection, setSortDirection] = useState("asc");
@@ -22,6 +23,9 @@ const Home = () => {
     <>
       <Filters {...filters} />
       <Bands selectedGenre={selectedGenre} sortDirection={sortDirection} />
+      
+        <Navbar  />
+      
     </>
   );
 };
