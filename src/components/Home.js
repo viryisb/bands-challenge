@@ -21,10 +21,12 @@ const Home = () => {
 
   return (
     <>
+     
       <Filters {...filters} />
       <Bands selectedGenre={selectedGenre} sortDirection={sortDirection} />
+      <Navbar  />
       
-        <Navbar  />
+       
       
     </>
   );
